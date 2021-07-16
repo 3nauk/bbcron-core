@@ -3,9 +3,34 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
+  create-tag:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract Maven project version
+        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        id: project-version
+
+      - name: Show extracted Maven project version
+        run: echo ${{ steps.project-version.outputs.version }}
+
+      - name: GitHub Script
+        uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ github.run_number }}",
+              sha: context.sha
+            })
+
   build-with-jdk-11:
     runs-on: self-hosted
     steps:
@@ -16,19 +41,17 @@ jobs:
         with:
           java-version: 11
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Build with Maven
-        run: mvn clean verify
+        run: mvn clean verify spotbugs:spotbugs
+
+      - uses: jwgmeligmeyling/spotbugs-github-action@master
+        with:
+          path: '**/spotbugsXml.xml'
 
       - name: Publish to GitHub Packages Apache Maven
         env:
           GITHUB_USER: ${{secrets.bnauk_user}}
           GITHUB_TOKEN: ${{secrets.bnauk_token}}
         run: mvn -X -s settings.xml -B -Dchangelist= deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/3nauk/maven-site
+
+
