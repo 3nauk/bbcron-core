@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-with-jdk-11:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
 
