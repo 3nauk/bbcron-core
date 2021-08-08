@@ -21,9 +21,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean verify
 
-      - name: Publish to GitHub Packages Apache Maven
-        env:
-          GITHUB_USER: ${{secrets.bnauk_user}}
-          GITHUB_TOKEN: ${{secrets.bnauk_token}}
-        run: mvn -X -s settings.xml -B -Dchangelist=-SNAPSHOT deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/3nauk/maven-site
+      #- name: Publish to GitHub Packages Apache Maven
+      #  env:
+      #    GITHUB_USER: ${{secrets.bnauk_user}}
+      #    GITHUB_TOKEN: ${{secrets.bnauk_token}}
+      #  run: mvn -X -s settings.xml -B -Dchangelist=-SNAPSHOT deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/3nauk/maven-site
 
