@@ -1,6 +1,6 @@
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   test:
@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Uses POM Version Bump
-        uses: wlicamele-bw/pom-version-bump@v1.0
+        uses: wlicamele-bw/pom-version-bump@v0.2
         id: bump
         with:
           bumpVersionType: bump
