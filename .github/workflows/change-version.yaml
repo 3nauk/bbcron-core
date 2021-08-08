@@ -20,6 +20,6 @@ jobs:
           bumpVersion: patch
           bumpChangelog: true
           changelogDesc: ${{ github.event.pull_request.title }}
-          mainBranchName: {{ github.base_ref }}
+          mainBranchName: ${{ github.base_ref }}
       - name: Get the version number
         run: echo "The Version Number is ${{ steps.bump.outputs.versionNumber }}"
