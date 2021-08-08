@@ -17,9 +17,9 @@ jobs:
         id: bump
         with:
           bumpVersionType: bump
-          bumpVersion: patch
-          bumpChangelog: true
-          changelogDesc: ${{ github.event.pull_request.title }}
+          bumpVersion: minor
+          bumpChangelog: false
+          #changelogDesc: ${{ github.event.pull_request.title }}
           mainBranchName: ${{ github.base_ref }}
       - name: Get the version number
         run: echo "The Version Number is ${{ steps.bump.outputs.versionNumber }}"
