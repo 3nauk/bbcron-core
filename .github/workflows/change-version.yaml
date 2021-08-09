@@ -18,7 +18,7 @@ jobs:
           java-version: 11
       - name: Get Version
         id: pom-version
-        run: echo "::set-output name=version::mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version
+        run: echo "::set-output name=version::mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"
       - name: Print Version
         run: echo "The version we just got is ${{ steps.pom-version.outputs.version }}"
       - name: Uses POM Version Bump
