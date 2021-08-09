@@ -7,7 +7,7 @@ on:
 
 jobs:
   create-tag:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
       - name: GitHub Script
         uses: actions/github-script@v4.0.2
         with:
-          github-token: ${{ github.token }}
+          github-token: ${{secrets.bnauk_token}}
           script: |
             github.git.createRef({
               owner: context.repo.owner,
