@@ -18,6 +18,23 @@ jobs:
         with:
           java-version: 11
 
+      - name: Extract Maven project version
+        run: 3nauk/bbcron-action-maven-getinfo@v1.0
+        id: project-version
+
+      - run: echo "${{ steps.maven-info.outputs.version }}"
+      - run: echo "${{ steps.maven-info.outputs.artifactId }}"
+      - run: echo "${{ steps.maven-info.outputs.groupId }}"
+
+      - name: Remove PackageVersion
+        uses: 3nauk/bbcron-action-remove-packages@0.0.1
+          with:
+            organization: '3nauk'
+            packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
+            packageVersion: ${{ steps.maven-info.outputs.version }}
+            token: ${{secrets.bnauk_token}}
+
+
       - name: Build with Maven
         run: mvn clean verify
 
