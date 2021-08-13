@@ -28,11 +28,11 @@ jobs:
 
       - name: Remove PackageVersion
         uses: 3nauk/bbcron-action-remove-packages@0.0.1
-          with:
-            organization: '3nauk'
-            packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
-            packageVersion: ${{ steps.maven-info.outputs.version }}
-            token: ${{secrets.bnauk_token}}
+        with:
+          organization: '3nauk'
+          packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
+          packageVersion: ${{ steps.maven-info.outputs.version }}
+          token: ${{secrets.bnauk_token}}
 
 
       - name: Build with Maven
