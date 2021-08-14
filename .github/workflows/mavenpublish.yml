@@ -28,17 +28,17 @@ jobs:
           packageVersion: ${{ steps.maven-info.outputs.version }}
           token: ${{secrets.bnauk_token}}
 
-      - name: GitHub Script
-        uses: actions/github-script@v4.0.2
-        with:
-          github-token: ${{secrets.bnauk_token}}
-          script: |
-            github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ github.run_number }}",
-              sha: context.sha
-            })
+#      - name: GitHub Script
+#              uses: actions/github-script@v4.0.2
+#              with:
+#                github-token: ${{secrets.bnauk_token}}
+#                script: |
+#                  github.git.createRef({
+#                    owner: context.repo.owner,
+#                    repo: context.repo.repo,
+#                    ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ github.run_number }}",
+#                    sha: context.sha
+#                  })
 
   build-with-jdk-11:
     runs-on: self-hosted
