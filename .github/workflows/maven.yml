@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jacoco-report
-          path: target/site/jacoco/
+          path: ./target/site/jacoco/
 
       - name: 🔍 Find Bugs Security ${{ steps.maven-info.outputs.artifactId }}
         uses: jwgmeligmeyling/spotbugs-github-action@master
@@ -41,7 +41,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: target/surfire-reports/*.xml
+          files: ./target/surfire-reports/**/*.xml
 
       - name: Publish to GitHub Packages Apache Maven
         env:
