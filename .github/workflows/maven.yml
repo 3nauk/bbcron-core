@@ -38,7 +38,7 @@ jobs:
           path: '**/spotbugsXml.xml'
 
       - name: Add coverage to PR
-        id: jacoco
+        id: jacoco_report
         uses: madrapps/jacoco-report@v1.1
         with:
           path: target/site/jacoco
