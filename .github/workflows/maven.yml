@@ -19,7 +19,7 @@ jobs:
           java-version: 11
 
       - name: 🔥 Build with Maven
-          run: mvn clean verify spotbugs:spotbugs
+        run: mvn clean verify spotbugs:spotbugs
       - name: 📄 Generate Jacoco Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v1.0.0
