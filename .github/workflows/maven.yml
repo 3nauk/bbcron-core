@@ -50,7 +50,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: surfire-reports/*.xml
+          files: target/surfire-reports/*.xml
 
       - name: Publish to GitHub Packages Apache Maven
         env:
