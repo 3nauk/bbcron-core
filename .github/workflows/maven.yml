@@ -36,16 +36,37 @@ jobs:
         uses: jwgmeligmeyling/spotbugs-github-action@master
         with:
           path: '**/spotbugsXml.xml'
-
+      - name: Tree
+        run : tree
       - name: Publish Unit Test
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
           files: ./target/surfire-reports/**/*.xml
+#
+        #      - name: Publish to GitHub Packages Apache Maven
+          #       env:
+          #GITHUB_USER: ${{secrets.bnauk_user}}
+          #GITHUB_TOKEN: ${{secrets.bnauk_token}}
+        #run: mvn -X -s settings.xml -B -Dchangelist=-SNAPSHOT deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/3nauk/maven-site
 
-      - name: Publish to GitHub Packages Apache Maven
-        env:
-          GITHUB_USER: ${{secrets.bnauk_user}}
-          GITHUB_TOKEN: ${{secrets.bnauk_token}}
-        run: mvn -X -s settings.xml -B -Dchangelist=-SNAPSHOT deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/3nauk/maven-site
+remove-old-version:
+  runs-on: ubuntu-latest
+  needs: build-with-jdk-11
+  steps:
+    - uses: actions/checkout@v2
+    - name: Extract Maven project version
+      run: 3nauk/bbcron-action-maven-getinfo@v1.0.0
+      id: project-version
 
+    - run: echo "${{ steps.maven-info.outputs.version }}"
+    - run: echo "${{ steps.maven-info.outputs.artifactId }}"
+    - run: echo "${{ steps.maven-info.outputs.groupId }}"
+
+    - name: ‼️Remove PackageVersion
+      uses: 3nauk/bbcron-action-remove-packages@v0.0.3
+      with:
+        organization: '3nauk'
+        packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
+        packageVersion: ${{ steps.maven-info.outputs.version }}
+        token: ${{secrets.bnauk_token}}
