@@ -37,15 +37,6 @@ jobs:
         with:
           path: '**/spotbugsXml.xml'
 
-      - name: Add coverage to PR
-        id: jacoco_report
-        uses: madrapps/jacoco-report@v1.1
-        with:
-          path: target/site/jacoco
-          token: ${{ secrets.bnauk_token }}
-          min-coverage-overall: 40
-          min-coverage-changed-files: 60
-
       - name: Publish Unit Test
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
