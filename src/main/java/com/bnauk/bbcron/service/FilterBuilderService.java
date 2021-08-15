@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author benauca
+ * 
  * Service for Filtering Page This class is used to extract any filters requested by the client.
  */
 @Service
@@ -39,10 +40,10 @@ public class FilterBuilderService {
 
       if (criteria != null && !criteria.isEmpty()) {
 
-        final String FILTER_SHEARCH_DELIMITER = "&";
+        final String FILTER_SEARCH_DELIMITER = "&";
         final String FILTER_CONDITION_DELIMITER = "\\|";
 
-        List<String> values = split(criteria, FILTER_SHEARCH_DELIMITER);
+        List<String> values = split(criteria, FILTER_SEARCH_DELIMITER);
         if (!values.isEmpty()) {
           values.forEach(x -> {
             List<String> filter = split(x, FILTER_CONDITION_DELIMITER);

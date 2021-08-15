@@ -1,6 +1,7 @@
 package com.bnauk.bbcron.dto.filter;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
  * Description: Filter Condition Class
  */
 @Data
+@Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class FilterCondition {

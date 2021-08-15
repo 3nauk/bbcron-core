@@ -1,7 +1,10 @@
 package com.bnauk.bbcron.exceptions;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 
 
