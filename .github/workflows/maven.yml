@@ -18,8 +18,39 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build with Maven
-        run: mvn clean verify
+      - name: 🔥 Build with Maven
+          run: mvn clean verify spotbugs:spotbugs
+      - name: 📄 Generate Jacoco Badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v1.0.0
+      - name: 📈Log coverage percentage
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+      - name: 👌 Upload Jacoco coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+
+      - name: 🔍 Find Bugs Security ${{ steps.maven-info.outputs.artifactId }}
+        uses: jwgmeligmeyling/spotbugs-github-action@master
+        with:
+          path: '**/spotbugsXml.xml'
+
+      - name: Add coverage to PR
+          id: jacoco
+          uses: madrapps/jacoco-report@v1.1
+          with:
+            path: target/site/jacoco
+            token: ${{ secrets.bnauk_token }}
+            min-coverage-overall: 40
+            min-coverage-changed-files: 60
+
+      - name: Publish Unit Test
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: surfire-reports/*.xml
 
       - name: Publish to GitHub Packages Apache Maven
         env:
