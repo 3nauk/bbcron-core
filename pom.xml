@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.bnauk.bbcron</groupId>
 	<artifactId>bbcron-core</artifactId>
-	<version>0.0.1${changelist}</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>bbcron-core</name>
 	<description>BBcron Core project for Spring Boot</description>
 	<properties>
@@ -39,6 +39,33 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<mainClass>com.example.Main</mainClass>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>

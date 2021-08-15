@@ -1,14 +1,14 @@
 package com.bnauk.bbcron.repository.support;
 
 import com.bnauk.bbcron.dto.filter.FilterCondition;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * This class is used to build all the queries passed as parameters. filterAndConditions (filter
@@ -48,6 +48,14 @@ public class GenericFilterCriteriaBuilder {
     filterAndConditions = new ArrayList<>();
   }
 
+
+  /**
+   * Add conditions to the filter
+   *
+   * @param andConditions AND filters
+   * @param orConditions  OR Filters
+   * @return
+   */
   public Query addCondition(List<FilterCondition> andConditions,
       List<FilterCondition> orConditions) {
 
