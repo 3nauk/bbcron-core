@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
  * @param <T>
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class PageResponse<T> {
 
