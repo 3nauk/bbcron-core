@@ -1,7 +1,6 @@
 name: Jacoco-report
 on:
-  push:
-    branches: [ main, feature/*]
+  pull_request:
 jobs:
   codicity:
     runs-on: ubuntu-latest
@@ -19,15 +18,9 @@ jobs:
       - name: Generate Jacoco Badge
         id: jacoco-badge
         uses: cicirello/jacoco-badge-generator@v1.0.0
-
-      - name: Upload Jacoco coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/jacoco.xml
       - name: Report to PR
         id: jacoco
-        uses: madrapps/jacoco-report@v1.2
+        uses: madrapps/jacoco-report@fd4800e8a81e21bdf373438e5918b975df041d15
         with:
           paths: target/site/jacoco/jacoco.xml
           token: ${{secrets.bnauk_token}}
