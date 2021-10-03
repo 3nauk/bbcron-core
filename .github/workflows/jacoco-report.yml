@@ -1,7 +1,7 @@
 name: Jacoco-report
 on:
   push:
-    branches: [ develop, main, feature/*]
+    branches: [ main, feature/*]
 jobs:
   codicity:
     runs-on: ubuntu-latest
