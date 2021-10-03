@@ -57,9 +57,10 @@ jobs:
       - run: echo "${{ steps.maven-info.outputs.groupId }}"
 
       - name: ‼️Remove PackageVersion
-        uses: 3nauk/bbcron-action-remove-packages@fc28300cbff1dcf4945d48b2eeb58f39ba0918c3
+        uses: 3nauk/bbcron-action-remove-packages@v0.0.4
         with:
+          owner: ${{secrets.bnauk_user}}
+          token: ${{secrets.bnauk_token}}
           organization: '3nauk'
           packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
           packageVersion: ${{ steps.maven-info.outputs.version }}
-          token: ${{secrets.bnauk_token}}
