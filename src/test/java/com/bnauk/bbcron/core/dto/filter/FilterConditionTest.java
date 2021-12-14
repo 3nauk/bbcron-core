@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.dto.filter;
+package com.bnauk.bbcron.user.dto.filter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,8 +11,12 @@ class FilterConditionTest {
 
   @BeforeEach
   public void createCondition() {
-    condition = FilterCondition.builder().field("fullName").operator(FilterOperationEnum.EQUAL)
-        .value("John Doe").build();
+    condition =
+        FilterCondition.builder()
+            .field("fullName")
+            .operator(FilterOperationEnum.EQUAL)
+            .value("John Doe")
+            .build();
   }
 
   @Test
@@ -31,8 +35,8 @@ class FilterConditionTest {
   }
 
   @Test
-  public void test_toString(){
-    assertEquals("FilterCondition(field=fullName, operator=eq, value=John Doe)", condition.toString());
+  public void test_toString() {
+    assertEquals(
+        "FilterCondition(field=fullName, operator=eq, value=John Doe)", condition.toString());
   }
-
 }

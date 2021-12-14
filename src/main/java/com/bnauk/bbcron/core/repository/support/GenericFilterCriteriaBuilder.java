@@ -1,14 +1,14 @@
-package com.bnauk.bbcron.repository.support;
+package com.bnauk.bbcron.core.repository.support;
 
-import com.bnauk.bbcron.dto.filter.FilterCondition;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
+import com.bnauk.bbcron.core.dto.filter.FilterCondition;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * This class is used to build all the queries passed as parameters. filterAndConditions (filter
@@ -21,43 +21,44 @@ public class GenericFilterCriteriaBuilder {
 
   // Create map of filter
   static {
-    FILTER_CRITERIA.put("EQUAL",
-        condition -> Criteria.where(condition.getField()).is(condition.getValue()));
-    FILTER_CRITERIA.put("NOT_EQUAL",
-        condition -> Criteria.where(condition.getField()).ne(condition.getValue()));
-    FILTER_CRITERIA.put("GREATER_THAN",
-        condition -> Criteria.where(condition.getField()).gt(condition.getValue()));
-    FILTER_CRITERIA.put("GREATER_THAN_OR_EQUAL_TO",
+    FILTER_CRITERIA.put(
+        "EQUAL", condition -> Criteria.where(condition.getField()).is(condition.getValue()));
+    FILTER_CRITERIA.put(
+        "NOT_EQUAL", condition -> Criteria.where(condition.getField()).ne(condition.getValue()));
+    FILTER_CRITERIA.put(
+        "GREATER_THAN", condition -> Criteria.where(condition.getField()).gt(condition.getValue()));
+    FILTER_CRITERIA.put(
+        "GREATER_THAN_OR_EQUAL_TO",
         condition -> Criteria.where(condition.getField()).gte(condition.getValue()));
-    FILTER_CRITERIA.put("LESS_THAN",
-        condition -> Criteria.where(condition.getField()).lt(condition.getValue()));
-    FILTER_CRITERIA.put("LESSTHAN_OR_EQUAL_TO",
+    FILTER_CRITERIA.put(
+        "LESS_THAN", condition -> Criteria.where(condition.getField()).lt(condition.getValue()));
+    FILTER_CRITERIA.put(
+        "LESSTHAN_OR_EQUAL_TO",
         condition -> Criteria.where(condition.getField()).lte(condition.getValue()));
-    FILTER_CRITERIA.put("CONTAINS",
+    FILTER_CRITERIA.put(
+        "CONTAINS",
         condition -> Criteria.where(condition.getField()).regex((String) condition.getValue()));
-    FILTER_CRITERIA.put("JOIN",
-        condition -> Criteria.where(condition.getField()).is(condition.getValue()));
+    FILTER_CRITERIA.put(
+        "JOIN", condition -> Criteria.where(condition.getField()).is(condition.getValue()));
   }
 
   private final List<FilterCondition> filterAndConditions;
   private final List<FilterCondition> filterOrConditions;
-
 
   public GenericFilterCriteriaBuilder() {
     filterOrConditions = new ArrayList<>();
     filterAndConditions = new ArrayList<>();
   }
 
-
   /**
    * Add conditions to the filter
    *
    * @param andConditions AND filters
-   * @param orConditions  OR Filters
+   * @param orConditions OR Filters
    * @return
    */
-  public Query addCondition(List<FilterCondition> andConditions,
-      List<FilterCondition> orConditions) {
+  public Query addCondition(
+      List<FilterCondition> andConditions, List<FilterCondition> orConditions) {
 
     if (andConditions != null && !andConditions.isEmpty()) {
       filterAndConditions.addAll(andConditions);
@@ -71,14 +72,18 @@ public class GenericFilterCriteriaBuilder {
     Criteria criteria = new Criteria();
 
     // build criteria
-    filterAndConditions.stream().map(condition -> criteriaAndClause.add(buildCriteria(condition)))
+    filterAndConditions.stream()
+        .map(condition -> criteriaAndClause.add(buildCriteria(condition)))
         .collect(Collectors.toList());
-    filterOrConditions.stream().map(condition -> criteriaOrClause.add(buildCriteria(condition)))
+    filterOrConditions.stream()
+        .map(condition -> criteriaOrClause.add(buildCriteria(condition)))
         .collect(Collectors.toList());
 
     if (!criteriaAndClause.isEmpty() && !criteriaOrClause.isEmpty()) {
-      return new Query(criteria.andOperator(criteriaAndClause.toArray(new Criteria[0]))
-          .orOperator(criteriaOrClause.toArray(new Criteria[0])));
+      return new Query(
+          criteria
+              .andOperator(criteriaAndClause.toArray(new Criteria[0]))
+              .orOperator(criteriaOrClause.toArray(new Criteria[0])));
     } else if (!criteriaAndClause.isEmpty()) {
       return new Query(criteria.andOperator(criteriaAndClause.toArray(new Criteria[0])));
     } else if (!criteriaOrClause.isEmpty()) {
@@ -86,9 +91,7 @@ public class GenericFilterCriteriaBuilder {
     } else {
       return new Query();
     }
-
   }
-
 
   /**
    * Build the predicate according to the request
@@ -106,5 +109,4 @@ public class GenericFilterCriteriaBuilder {
 
     return function.apply(condition);
   }
-
 }

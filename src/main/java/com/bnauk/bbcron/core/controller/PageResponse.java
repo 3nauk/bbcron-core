@@ -1,7 +1,6 @@
-package com.bnauk.bbcron.controller;
+package com.bnauk.bbcron.core.controller;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,50 +14,34 @@ import org.springframework.data.domain.Page;
 @NoArgsConstructor
 public class PageResponse<T> {
 
-  /**
-   * Total pages
-   */
+  /** Total pages */
   private int totalPages;
 
-  /**
-   * Total Items
-   */
+  /** Total Items */
   private long totalItems;
 
-  /**
-   * Current Page
-   */
+  /** Current Page */
   private int currentPage;
 
-  /**
-   * boolean to indicate if is First Page
-   */
+  /** boolean to indicate if is First Page */
   private boolean first;
 
-  /**
-   * boolean to indicate if is Last Page
-   */
+  /** boolean to indicate if is Last Page */
   private boolean last;
 
-  /**
-   * Number Items per page
-   */
+  /** Number Items per page */
   private int itemsPerPage;
 
-  /**
-   * Page Size
-   */
+  /** Page Size */
   private int pageSize;
 
-  /**
-   * Items as List
-   */
+  /** Items as List */
   private List<T> items;
 
   /**
    * Set Items as page
    *
-   * @param pg   as {@link Page<T>}
+   * @param pg as {@link Page<T>}
    * @param elts as {@link List<T>}
    */
   public void setPageStats(Page<T> pg, List<T> elts) {

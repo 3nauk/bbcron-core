@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.bnauk.bbcron</groupId>
 	<artifactId>bbcron-core</artifactId>
-	<version>0.0.5${changelist}</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<name>bbcron-core</name>
 	<description>BBcron Core project for Spring Boot</description>
 	<properties>

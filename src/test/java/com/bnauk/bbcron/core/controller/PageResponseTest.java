@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.controller;
+package com.bnauk.bbcron.user.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -42,8 +41,8 @@ class PageResponseTest {
     assertEquals(true, response.isFirst());
     assertEquals(false, response.isLast());
   }
-
 }
+
 class BBCronPage implements Page<BBCronPage> {
   @Override
   public int getTotalPages() {

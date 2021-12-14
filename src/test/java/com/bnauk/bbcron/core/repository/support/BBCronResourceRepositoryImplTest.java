@@ -1,8 +1,7 @@
-package com.bnauk.bbcron.repository.support;
+package com.bnauk.bbcron.user.repository.support;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.bnauk.bbcron.repository.BBCronResourceRepository;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,20 +16,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
 
 @ExtendWith(MockitoExtension.class)
-//@RunWith(JUnitPlatform.class)
+// @RunWith(JUnitPlatform.class)
 class BBCronResourceRepositoryImplTest {
 
-  @Mock
-  private MongoOperations mongoOperations;
-  @Mock
-  private MongoEntityInformation entityInformation;
+  @Mock private MongoOperations mongoOperations;
+  @Mock private MongoEntityInformation entityInformation;
 
   @InjectMocks
   private BBCronResourceRepositoryImpl<BBCronTestDomain, String> bbCronResourceRepository;
@@ -42,52 +38,55 @@ class BBCronResourceRepositoryImplTest {
 
   @Test
   void find_all_by_query_and_page() {
-    assertNotNull(bbCronResourceRepository.findAll(new Query(), new Pageable() {
-      @Override
-      public int getPageNumber() {
-        return 0;
-      }
+    assertNotNull(
+        bbCronResourceRepository.findAll(
+            new Query(),
+            new Pageable() {
+              @Override
+              public int getPageNumber() {
+                return 0;
+              }
 
-      @Override
-      public int getPageSize() {
-        return 0;
-      }
+              @Override
+              public int getPageSize() {
+                return 0;
+              }
 
-      @Override
-      public long getOffset() {
-        return 0;
-      }
+              @Override
+              public long getOffset() {
+                return 0;
+              }
 
-      @Override
-      public Sort getSort() {
-        return Sort.by("testId").ascending();
-      }
+              @Override
+              public Sort getSort() {
+                return Sort.by("testId").ascending();
+              }
 
-      @Override
-      public Pageable next() {
-        return null;
-      }
+              @Override
+              public Pageable next() {
+                return null;
+              }
 
-      @Override
-      public Pageable previousOrFirst() {
-        return null;
-      }
+              @Override
+              public Pageable previousOrFirst() {
+                return null;
+              }
 
-      @Override
-      public Pageable first() {
-        return null;
-      }
+              @Override
+              public Pageable first() {
+                return null;
+              }
 
-      @Override
-      public Pageable withPage(int pageNumber) {
-        return null;
-      }
+              @Override
+              public Pageable withPage(int pageNumber) {
+                return null;
+              }
 
-      @Override
-      public boolean hasPrevious() {
-        return false;
-      }
-    }));
+              @Override
+              public boolean hasPrevious() {
+                return false;
+              }
+            }));
   }
 
   @Test
@@ -104,16 +103,9 @@ class BBCronResourceRepositoryImplTest {
 @JsonPropertyOrder(value = {"testId", "testName"})
 class BBCronTestDomain {
 
-  /**
-   * Test Id
-   */
-  @Id
-  private String testId;
+  /** Test Id */
+  @Id private String testId;
 
-  /**
-   * Test name
-   */
+  /** Test name */
   private String testName;
-
-
 }

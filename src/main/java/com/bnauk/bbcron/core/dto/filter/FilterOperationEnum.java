@@ -1,15 +1,15 @@
-package com.bnauk.bbcron.dto.filter;
+package com.bnauk.bbcron.core.dto.filter;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
+ *
+ *
  * <h2>Filter Operators as Enum</h2>
  *
  * @author benauca
- * <p>
- * Description: Filter Operators Enum
+ *     <p>Description: Filter Operators Enum
  */
-
 public enum FilterOperationEnum {
   EQUAL("eq"),
   NOT_EQUAL("neq"),
@@ -31,9 +31,7 @@ public enum FilterOperationEnum {
   JOIN("jn"),
   IS("is");
 
-  /**
-   * Operator Value
-   */
+  /** Operator Value */
   private final String value;
 
   FilterOperationEnum(String value) {
@@ -55,5 +53,4 @@ public enum FilterOperationEnum {
   public String toString() {
     return String.valueOf(value);
   }
-
 }
