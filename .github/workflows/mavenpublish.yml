@@ -62,6 +62,5 @@ jobs:
           owner: ${{secrets.bnauk_user}}
           token: ${{secrets.bnauk_token}}
           organization: '3nauk'
-          #packageName: ${{ steps.maven-info.outputs.groupId }}.${{ steps.maven-info.outputs.artifactId }}
           packageName: 'com.bnauk.bbcron.bbcron-core'
           packageVersion: ${{ steps.maven-info.outputs.version }}
