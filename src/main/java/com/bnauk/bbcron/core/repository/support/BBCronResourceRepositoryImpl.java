@@ -1,6 +1,6 @@
-package com.bnauk.bbcron.repository.support;
+package com.bnauk.bbcron.core.repository.support;
 
-import com.bnauk.bbcron.repository.BBCronResourceRepository;
+import com.bnauk.bbcron.core.repository.BBCronResourceRepository;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -18,8 +18,8 @@ public class BBCronResourceRepositoryImpl<T, I extends Serializable>
   private MongoOperations mongoOperations;
   private MongoEntityInformation entityInformation;
 
-  public BBCronResourceRepositoryImpl(final MongoEntityInformation entityInformation,
-      final MongoOperations mongoOperations) {
+  public BBCronResourceRepositoryImpl(
+      final MongoEntityInformation entityInformation, final MongoOperations mongoOperations) {
     super(entityInformation, mongoOperations);
 
     this.entityInformation = entityInformation;
@@ -30,10 +30,14 @@ public class BBCronResourceRepositoryImpl<T, I extends Serializable>
   public Page<T> findAll(final Query query, final Pageable pageable) {
     Assert.notNull(query, "Query must not be null!");
 
-    long total = mongoOperations.count(query, entityInformation.getJavaType(),
-        entityInformation.getCollectionName());
-    List<T> content = mongoOperations.find(query.with(pageable), entityInformation.getJavaType(),
-        entityInformation.getCollectionName());
+    long total =
+        mongoOperations.count(
+            query, entityInformation.getJavaType(), entityInformation.getCollectionName());
+    List<T> content =
+        mongoOperations.find(
+            query.with(pageable),
+            entityInformation.getJavaType(),
+            entityInformation.getCollectionName());
 
     return new PageImpl<T>(content, pageable, total);
   }
@@ -41,7 +45,7 @@ public class BBCronResourceRepositoryImpl<T, I extends Serializable>
   @Override
   public List<T> findAll(Query query) {
     Assert.notNull(query, "Query must not be null!");
-    return mongoOperations.find(query, entityInformation.getJavaType(),
-        entityInformation.getCollectionName());
+    return mongoOperations.find(
+        query, entityInformation.getJavaType(), entityInformation.getCollectionName());
   }
 }

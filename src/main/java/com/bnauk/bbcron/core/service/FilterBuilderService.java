@@ -1,8 +1,8 @@
-package com.bnauk.bbcron.service;
+package com.bnauk.bbcron.core.service;
 
-import com.bnauk.bbcron.dto.filter.FilterCondition;
-import com.bnauk.bbcron.dto.filter.FilterOperationEnum;
-import com.bnauk.bbcron.exceptions.BadRequestException;
+import com.bnauk.bbcron.core.dto.filter.FilterCondition;
+import com.bnauk.bbcron.core.dto.filter.FilterOperationEnum;
+import com.bnauk.bbcron.core.exceptions.BadRequestException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,11 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
 /**
  * @author benauca
- * 
- * Service for Filtering Page This class is used to extract any filters requested by the client.
+ *     <p>Service for Filtering Page This class is used to extract any filters requested by the
+ *     client.
  */
 @Service
 public class FilterBuilderService {
@@ -30,8 +29,7 @@ public class FilterBuilderService {
    * Prepare filter condition. extract the different filters used in the controller via
    *
    * @param criteria search Criteria.
-   * @return a list of {@link FilterCondition}
-   * @RequestParam
+   * @return a list of {@link FilterCondition} @RequestParam
    */
   public List<FilterCondition> createFilterCondition(String criteria) {
     List<FilterCondition> filters = new ArrayList<>();
@@ -45,14 +43,17 @@ public class FilterBuilderService {
 
         List<String> values = split(criteria, FILTER_SEARCH_DELIMITER);
         if (!values.isEmpty()) {
-          values.forEach(x -> {
-            List<String> filter = split(x, FILTER_CONDITION_DELIMITER);
-            if (FilterOperationEnum.fromValue(filter.get(1)) != null) {
-              filters.add(
-                  new FilterCondition(filter.get(0), FilterOperationEnum.fromValue(filter.get(1)),
-                      filter.get(2)));
-            }
-          });
+          values.forEach(
+              x -> {
+                List<String> filter = split(x, FILTER_CONDITION_DELIMITER);
+                if (FilterOperationEnum.fromValue(filter.get(1)) != null) {
+                  filters.add(
+                      new FilterCondition(
+                          filter.get(0),
+                          FilterOperationEnum.fromValue(filter.get(1)),
+                          filter.get(2)));
+                }
+              });
         }
       }
 
@@ -61,14 +62,13 @@ public class FilterBuilderService {
     } catch (Exception ex) {
       throw new BadRequestException("Cannot create condition filter " + ex.getMessage());
     }
-
   }
 
   /**
    * Get request pageable. Page Request Builder. custom pageable
    *
-   * @param size  the number of items to collect
-   * @param page  page number
+   * @param size the number of items to collect
+   * @param page page number
    * @param order search order filter (eg: field|ASC)
    * @return PageRequest
    */
@@ -91,9 +91,10 @@ public class FilterBuilderService {
         } else if (sortDirection.equalsIgnoreCase("DESC")) {
           return PageRequest.of((currentPage - 1), pageSize, Sort.by(Sort.Direction.DESC, column));
         } else {
-          throw new IllegalArgumentException(String.format(
-              "Value for param 'order' is not valid : %s , must be 'asc' or 'desc'",
-              sortDirection));
+          throw new IllegalArgumentException(
+              String.format(
+                  "Value for param 'order' is not valid : %s , must be 'asc' or 'desc'",
+                  sortDirection));
         }
 
       } else {

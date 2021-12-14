@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.dto.filter;
+package com.bnauk.bbcron.core.dto.filter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,8 +9,7 @@ class FilterOperationEnumTest {
   @Test
   void fromValue() {
     assertEquals(FilterOperationEnum.fromValue("eq"), FilterOperationEnum.EQUAL);
-    assertEquals(FilterOperationEnum.fromValue("not_Exist_as_filter")
-        , null);
+    assertEquals(FilterOperationEnum.fromValue("not_Exist_as_filter"), null);
     assertEquals(FilterOperationEnum.fromValue("eq").toString(), "eq");
   }
 }

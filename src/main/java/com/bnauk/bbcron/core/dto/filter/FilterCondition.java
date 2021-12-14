@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.dto.filter;
+package com.bnauk.bbcron.core.dto.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
+ *
+ *
  * <h2>FilterCondition</h2>
  *
  * @author benauca
- * <p>
- * Description: Filter Condition Class
+ *     <p>Description: Filter Condition Class
  */
 @Data
 @Builder
@@ -18,19 +19,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FilterCondition {
 
-  /**
-   * Field
-   */
+  /** Field */
   private String field;
 
-  /**
-   * Operator {@link FilterOperationEnum}
-   */
+  /** Operator {@link FilterOperationEnum} */
   private FilterOperationEnum operator;
 
-  /**
-   * Value to Search
-   */
+  /** Value to Search */
   private Object value;
-
 }
