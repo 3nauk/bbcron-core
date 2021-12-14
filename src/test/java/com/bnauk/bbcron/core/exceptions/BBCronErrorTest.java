@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.user.exceptions;
+package com.bnauk.bbcron.core.exceptions;
 
 import static com.mongodb.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;

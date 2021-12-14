@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.user.repository.support;
+package com.bnauk.bbcron.core.repository.support;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

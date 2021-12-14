@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.user.controller;
+package com.bnauk.bbcron.core.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 

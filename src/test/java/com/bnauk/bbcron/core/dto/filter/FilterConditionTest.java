@@ -1,4 +1,4 @@
-package com.bnauk.bbcron.user.dto.filter;
+package com.bnauk.bbcron.core.dto.filter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

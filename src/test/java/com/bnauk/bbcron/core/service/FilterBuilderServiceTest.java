@@ -1,10 +1,10 @@
-package com.bnauk.bbcron.user.service;
+package com.bnauk.bbcron.core.service;
 
 import static com.mongodb.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.bnauk.bbcron.user.exceptions.BadRequestException;
+import com.bnauk.bbcron.core.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

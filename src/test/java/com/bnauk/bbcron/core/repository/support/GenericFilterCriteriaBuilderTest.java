@@ -1,11 +1,11 @@
-package com.bnauk.bbcron.user.repository.support;
+package com.bnauk.bbcron.core.repository.support;
 
 import static com.mongodb.assertions.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.bnauk.bbcron.user.dto.filter.FilterCondition;
-import com.bnauk.bbcron.user.dto.filter.FilterOperationEnum;
+import com.bnauk.bbcron.core.dto.filter.FilterCondition;
+import com.bnauk.bbcron.core.dto.filter.FilterOperationEnum;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
